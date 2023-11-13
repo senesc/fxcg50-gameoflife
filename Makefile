@@ -1,3 +1,6 @@
+APP_NAME	:=	GameOfLife
+APP_VERSION	:=	0.0.0
+
 #---------------------------------------------------------------------------------
 # Clear the implicit built in rules
 #---------------------------------------------------------------------------------
@@ -29,7 +32,7 @@ INCLUDES	:=
 # options for code and add-in generation
 #---------------------------------------------------------------------------------
 
-MKG3AFLAGS := -n basic:example -i uns:../unselected.bmp -i sel:../selected.bmp
+MKG3AFLAGS := -n basic:$(APP_NAME) -i uns:../assets/unselected.bmp -i sel:../assets/selected.bmp -V $(APP_VERSION)
 
 # Optional: add -flto to CFLAGS and LDFLAGS to enable link-time optimization
 # (LTO). Doing so will usually allow the compiler to generate much better code
@@ -58,7 +61,7 @@ LIBDIRS	:=
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
 
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
+export OUTPUT	:=	$(CURDIR)/$(BUILD)/$(TARGET)
 
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
@@ -100,7 +103,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
 					-L$(LIBFXCG_LIB)
 
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
+export OUTPUT	:=	$(CURDIR)/$(BUILD)/$(TARGET)
 .PHONY: all clean
 
 #---------------------------------------------------------------------------------
@@ -125,9 +128,11 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(OUTPUT).g3a: $(OUTPUT).bin
+# FORCING in order to never miss changes to mkg3a flags, app_version in particular
+$(OUTPUT).g3a: $(OUTPUT).bin FORCE
 $(OUTPUT).bin: $(OFILES)
 
+FORCE:
 
 -include $(DEPENDS)
 
