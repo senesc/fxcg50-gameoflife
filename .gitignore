@@ -1,0 +1,5 @@
+build
+*.g3a
+*.bin
+*.a
+*.o
