@@ -32,17 +32,6 @@ void destroy_game(Game *g) { // FIXME:
     free(g);
 }
 
-// void compute_neighbours(Game *g, unsigned char **neighbours) {
-//     for (unsigned char y = 0; y < g->height; y++) {
-//         for (unsigned char x = 0; x < g->width; x++) {
-//             neighbours[y][x] =
-//                 (unsigned char)g->matrix[y - 1][x - 1] + (unsigned char)g->matrix[y - 1][x] +
-//                 (unsigned char)g->matrix[y - 1][x + 1] + (unsigned char)g->matrix[y][x - 1] +
-//                 (unsigned char)g->matrix[y][x + 1] + (unsigned char)g->matrix[y + 1][x - 1] +
-//                 (unsigned char)g->matrix[y - 1][x] + (unsigned char)g->matrix[y + 1][x + 1];
-//         }
-//     }
-// }
 void compute_neighbours(Game *g, unsigned char **neighbours) {
     for (unsigned char y = 0; y < g->height; y++) {
         for (unsigned char x = 0; x < g->width; x++) {
