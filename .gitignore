@@ -3,3 +3,4 @@ build
 *.bin
 *.a
 *.o
+compile_flags.txt
