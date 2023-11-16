@@ -18,3 +18,6 @@ Both of these need to be in your PATH.
 
 To build, clone this repository and navigate to the top level folder. Then download the libfxcg submodule with ```git submodule update --init --recursive```.  
 Finally, run ```make``` and, if no errors arise, `fxcg50-gameoflife.g3a` will be built in the `build` directory
+
+### Debugging
+To compile the debug build and get extra diagnostics (although it is undocumented as of now) run `make` with the flag `DEBUG=1`

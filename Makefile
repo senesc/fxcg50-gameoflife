@@ -43,6 +43,12 @@ CXXFLAGS	=	$(CFLAGS) -fno-exceptions
 
 LDFLAGS	= $(MACHDEP) -T$(FXCGSDK)/toolchain/prizm.x -Wl,-static -Wl,-gc-sections
 
+DEBUG		?=	0
+ifeq ($(DEBUG), 1)
+	CFLAGS += -DDEBUG
+	CXXFLAGS += -DDEBUG
+endif
+
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
@@ -107,8 +113,10 @@ export OUTPUT	:=	$(CURDIR)/$(BUILD)/$(TARGET)
 .PHONY: all clean
 
 #---------------------------------------------------------------------------------
+
+#TODO: refactor makefile to avoid nested call, it makes everything worse.
 all: $(BUILD)
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile DEBUG=$(DEBUG)
 
 $(BUILD):
 	@mkdir $@
