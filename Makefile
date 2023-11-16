@@ -24,7 +24,7 @@ include $(FXCGSDK)/toolchain/prizm_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	src
+SOURCES		:=	src src/views src/logic
 DATA		:=	data  
 INCLUDES	:=
 
